@@ -10,6 +10,7 @@ add_theme_support( 'html5' );
 add_theme_support( 'automatic-feed-links' );
 add_theme_support( 'custom-logo' );
 add_theme_support( 'custom-header' );
+add_theme_support('widgets');
 
 // add support theme with woocomerce
 
@@ -26,6 +27,7 @@ function netelites_theme_scripts(){
     wp_enqueue_style('swiper-bundle-css', get_template_directory_uri().'/assets/css/swiper-bundle.min.css' );
 
     wp_enqueue_script('script-swiper-bundle', get_template_directory_uri() . '/assets/js/swiper-bundle.min.js', array(), '1.0.0', true );
+    wp_enqueue_script('jquery-countdown-min', get_template_directory_uri() . '/assets/js/jquery.countdown.min.js', array(), '1.0.0', true );
     wp_enqueue_script('netelites-script' , get_template_directory_uri() . '/assets/js/netelites.js',array("jquery"), '1.0.0', true);
 }
 add_action('wp_enqueue_scripts','netelites_theme_scripts');
@@ -33,9 +35,10 @@ add_action('wp_enqueue_scripts','netelites_theme_scripts');
 // add menu in theme
 
 function netelites_header_menu(){
-    register_nav_menu(
-        'header-menu-index',
-        __('هدر اصلی')
+    register_nav_menus(
+        array(
+            'header-menu-index' => esc_html__('Header Menu Index','netelites')
+        )
     );
 }
 add_action('init','netelites_header_menu');
@@ -80,6 +83,25 @@ function netelites_barnd_posttype(){
 add_filter('init','netelites_barnd_posttype');
 add_image_size( 'barnd-thumbnail', 150, 100, false );
 
+// add post type video
+
+function netelites_video_posttype(){
+    register_post_type('video',
+        array(
+            'labels' => array(
+                'name' => __('ویدیو ها'),
+                'singular_name' => __('ویدیو'),
+                'add_new' => __('افزودن ویدیو'),
+                'add_new_item' => __('افزودن ویدیو')
+            ),
+            'public' => true,
+            'archive' => false,
+            'supports' => array('title','editor','thumbnail','link','video')
+        )
+    );
+}
+add_filter('init','netelites_video_posttype');
+
 // add options gallery product
 
 function netelits_options_gallery_product() { 
@@ -88,5 +110,18 @@ function netelits_options_gallery_product() {
 	add_theme_support( 'wc-product-gallery-slider' );
 }
 add_action( 'after_setup_theme', 'netelits_options_gallery_product', 100 );
+
+// add widgets 
+
+function netelite_register_widgets(){
+    register_sidebar(array(
+        "name" => "",
+        "id" => "",
+        "descirption" => "",
+        "before_widget" => "",
+        "after_widget" => ""
+    ));
+}
+add_action('widgets_init','netelite_register_widgets');
 
 

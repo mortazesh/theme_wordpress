@@ -23,6 +23,7 @@
     </div>
     <div class="categor-cantainer">
         <?php the_category(',') ?>
+        <?php the_tags() ?>
     </div>
     <div class="comment_conatiner">
         <?php comments_template(); ?>

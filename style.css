@@ -547,7 +547,7 @@ footer .bottom-footer .social-footer i{
     gap: 10px;
 }
 
-.product-conatiner .bottom-product>div{
+.product-conatiner .bottom-product>a{
     width: 25%;
     height: 325px;
     background-color: #FFFFFF;
@@ -556,9 +556,10 @@ footer .bottom-footer .social-footer i{
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    text-decoration: none;
 }
 
-.product-conatiner .bottom-product>div .image{
+.product-conatiner .bottom-product>a .image{
     width: 95%;
     height: 250px;
     border-radius: 8px;
@@ -566,13 +567,13 @@ footer .bottom-footer .social-footer i{
     margin-top: 10px;
 }
 
-.product-conatiner .bottom-product>div .image img{
+.product-conatiner .bottom-product>a .image img{
     width: 100%;
     height: 250px !important;
     border-radius: 8px;
 }
 
-.product-conatiner .bottom-product>div .content{
+.product-conatiner .bottom-product>a .content{
     width: 95%;
     height: 60px;
     display: flex;
@@ -582,22 +583,22 @@ footer .bottom-footer .social-footer i{
     gap: 5px;
 }
 
-.product-conatiner .bottom-product>div .content h2{
+.product-conatiner .bottom-product>a .content h2{
     font-size: 14px;
     font-weight: bold;
 }
 
-.product-conatiner .bottom-product>div .content p bdi{
+.product-conatiner .bottom-product>a .content p bdi{
     font-size: 12px !important;
     color: #FF0000 !important;
 }
 
-.product-conatiner .bottom-product>div .content p ins{
+.product-conatiner .bottom-product>a .content p ins{
     text-decoration: none;
     margin-right: 5px;
 }
 
-.product-conatiner .bottom-product>div .content .onsale{
+.product-conatiner .bottom-product>a .content .onsale{
     width: 40px;
     height: 40px;
     display: flex;
@@ -608,11 +609,15 @@ footer .bottom-footer .social-footer i{
     background-image: linear-gradient(315deg, #ff7878 0%, #ff0000 74%);
 }
 
-.product-conatiner .bottom-product>div .content p .woocommerce-Price-currencySymbol{
+.product-conatiner .bottom-product>a .content p .woocommerce-Price-currencySymbol{
     font-size: 13px;
     color: #FF0000;
     margin-right: 5px;
     margin-bottom: 0;
+}
+
+.price-hidden{
+    opacity: 0.5;
 }
 
 /* end section product shop index */
@@ -641,7 +646,7 @@ footer .bottom-footer .social-footer i{
 
 .product-conatiner-new{
     width: 100%;
-    height: 750px;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -681,19 +686,81 @@ footer .bottom-footer .social-footer i{
 
 .product-conatiner-new .bottom-product-new{
     width: 90%;
-    height: 700px;
+    height: auto;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-.product-conatiner-new  .bottom-product-new>div{
+.product-conatiner-new .bottom-product-new>a{
     width: calc(25% - 10px);
-    height: 350px;
+    height: 325px;
     background-color: #FFFFFF;
     border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.product-conatiner-new .bottom-product-new>a .image{
+    width: 95%;
+    height: 250px;
+    border-radius: 8px;
+    border: 1px solid #f2f2f2;
+    margin-top: 10px;
+}
+
+.product-conatiner-new .bottom-product-new>a .image img{
+    width: 100%;
+    height: 250px !important;
+    border-radius: 8px;
+}
+
+.product-conatiner-new .bottom-product-new>a .content{
+    width: 95%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.product-conatiner-new .bottom-product-new>a .content h2{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.product-conatiner-new .bottom-product-new>a .content p bdi{
+    font-size: 12px !important;
+    color: #FF0000 !important;
+}
+
+.product-conatiner-new .bottom-product-new>a .content p ins{
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+.product-conatiner-new .bottom-product-new>a .content .onsale{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -10px;
+    left: 280px;
+    background-image: linear-gradient(315deg, #ff7878 0%, #ff0000 74%);
+}
+
+.product-conatiner-new .bottom-product-new>a .content p .woocommerce-Price-currencySymbol{
+    font-size: 13px;
+    color: #FF0000;
+    margin-right: 5px;
+    margin-bottom: 0;
 }
 
 /* end section new product index */
@@ -793,16 +860,78 @@ footer .bottom-footer .social-footer i{
     width: 75%;
     height: 350px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 5px;
 }
 
-.product-discount-container .discount .product-discount>div{
-    width: 24%;
-    height: 300px;
+.product-discount-container .discount .product-discount>a{
+    width: calc(25%-10px);
+    height: 325px;
     background-color: #FFFFFF;
     border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.product-discount-container .discount .product-discount>a .image{
+    width: 95%;
+    height: 250px;
+    border-radius: 8px;
+    border: 1px solid #f2f2f2;
+    margin-top: 10px;
+}
+
+.product-discount-container .discount .product-discount>a .image img{
+    width: 100%;
+    height: 250px !important;
+    border-radius: 8px;
+}
+
+.product-discount-container .discount .product-discount>a .content{
+    width: 95%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.product-discount-container .discount .product-discount>a .content h2{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.product-discount-container .discount .product-discount>a .content p bdi{
+    font-size: 12px !important;
+    color: #FF0000 !important;
+}
+
+.product-discount-container .discount .product-discount>a .content p ins{
+    text-decoration: none;
+    margin-right: 5px;
+}
+
+.product-discount-container .discount .product-discount>a .content .onsale{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -10px;
+    left: 280px;
+    background-image: linear-gradient(315deg, #ff7878 0%, #ff0000 74%);
+}
+
+.product-discount-container .discount .product-discount>a .content p .woocommerce-Price-currencySymbol{
+    font-size: 12px;
+    color: #FF0000;
+    margin-right: 5px;
+    margin-bottom: 0;
 }
 
 /* end section discount product shop index */
@@ -1466,12 +1595,16 @@ footer .bottom-footer .social-footer i{
 .woocommerce{
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin-top: 15px;
 }
 
 .context{
-    width: 90%;
+    width: auto;
+}
+
+.context a{
+    width: auto;
 }
 
 .context .page-title{
@@ -1494,6 +1627,10 @@ li.product{
     height: 375px;
     background-color: #FFFFFF;
     border-radius: 10px !important;
+}
+
+.woocommerce ul.products li.product a{
+    width: 100%;
 }
 
 .woocommerce ul.products li.product a{
@@ -1681,7 +1818,6 @@ div.product{
 }
 
 .cart .quantity .input-text{
-    width: 100%;
     height: 40px;
     font-size: 13px;
     border-radius: 10px !important;
@@ -1804,6 +1940,11 @@ div.product{
     padding-right: 15px;
 }
 
+.woocommerce #review_form #respond p{
+    margin: 0;
+    margin-top: 5px;
+}
+
 /* end product shop */
 
 /* start page */
@@ -1823,3 +1964,95 @@ div.product{
 }
 
 /* end page */
+
+/* start basket */
+
+.woocommerce a{
+    width: 70%;
+}
+
+.woocommerce .cart-collaterals, .woocommerce-page .cart-collaterals{
+    width: 30%;
+    margin-right: 5px;
+}
+
+.woocommerce .cart-collaterals .cart_totals, .woocommerce-page .cart-collaterals .cart_totals{
+    width: 100%;
+}
+
+.cart_totals h2{
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.woocommerce-shipping-destination strong{
+    color: #FF0000;
+}
+
+.woocommerce-Price-amount bdi,
+.woocommerce-Price-amount .woocommerce-Price-currencySymbol{
+    color: #FF0000;
+}
+
+.wc-proceed-to-checkout .checkout-button{
+    width: 100%;
+    height: 40px;
+    background: linear-gradient(315deg, #ff7878 0%, #ff0000 74%) !important;
+    border-radius: 10px !important;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-thumbnail{
+    width: 250px;
+}
+
+.product-name{
+    width: 120px;
+}
+
+.product-name a{
+    text-decoration: none;
+}
+
+.product-quantity .quantity{
+    width: 100%;
+}
+
+.coupon{
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.coupon .button{
+    width: 25%;
+    height: 35px;
+    background: linear-gradient(315deg, #ff7878 0%, #ff0000 74%) !important;
+    color: #FFFFFF !important;
+}
+
+.woocommerce #content table.cart td.actions .input-text, .woocommerce table.cart td.actions .input-text, .woocommerce-page #content table.cart td.actions .input-text, .woocommerce-page table.cart td.actions .input-text{
+    width: 200px !important;
+    height: 35px;
+    border-radius: 10px;
+    border: 1px solid #707070;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.actions .button{
+    width: 100% !important;
+    height: 35px;
+    color: #FFFFFF !important;
+}
+
+/* end basket */

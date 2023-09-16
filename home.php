@@ -1,77 +1,17 @@
 <?php get_header(); ?>
 <!-- start silder -->
 <section class="silder-container">
-    <div class="swiper mySwiper silder">
-        <div class="swiper-wrapper">
-            <?php 
-                $arage = array(
-                    'post_type' => 'silder',
-                    'posts_per_page' => 4
-                ); 
-                // the query
-                $the_query = new WP_Query($arage);
-                // the loop
-                if($the_query->have_posts()){
-                    while($the_query->have_posts()){
-                        $the_query->the_post(); ?>
-                            <div class="swiper-slide">
-                                <?php the_post_thumbnail('slider-thumbnail'); ?>
-                            </div>
-                        <?php 
-                    }
-                }
-                wp_reset_postdata();
-            ?>
-        </div>
-        <div class="swiper-pagination"></div>
-    </div>
-    <div class="banner">
-        <div>
-
-        </div>
-        <div>
-
-        </div>
-    </div>
+    <?php get_template_part("/inc/template/silder/silder"); ?>
+    <?php get_template_part("/inc/template/silder/banner"); ?>
 </section>
 <!-- end silder -->
 <!-- start product shop -->
 <section class="product-conatiner">
-        <div class="top-product">
-            <p>محصولات فروشگاه</p>
-            <div class="line"></div>
-            <p>محصولات بیشتر</p>
-        </div>
-        <div class="bottom-product">
-            <?php 
-                $arage = array(
-                    'post_type' => 'product',
-                    'post_per_page' => 4
-                );
-                $the_query = new WP_Query($arage);
-                if($the_query->have_posts()){
-                    while($the_query->have_posts()){
-                        $the_query->the_post(); 
-                        global $product;
-                        ?>
-                            <div>
-                                <div class="image">
-                                    <?php the_post_thumbnail(); ?>
-                                </div>
-                                <div class="content">
-                                    <h2><?php the_title(); ?></h2>
-                                    <p>
-                                        <?php echo $product->get_price_html(); ?>
-                                    </p>
-                                </div>
-                            </div>
-                        <?php
-                    }
-                }
-                wp_reset_postdata();
-            ?>
-        </div>
-    </section>
+    <?php get_template_part("/inc/template/product/top-product/title"); ?>
+    <div class="bottom-product">
+        <?php get_template_part("/inc/template/product/bottom-product/product"); ?>
+    </div>
+</section>
 <!-- end product shop -->
 <!-- start product discount shop -->
 <section class="product-discount-container">
@@ -101,51 +41,46 @@
                 </div>
             </div>
             <div class="product-discount">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <?php 
+                    $arage = array(
+                        'post_type' => 'product',
+                        'post_per_page' => 4
+                    );
+                    $the_query = new WP_Query($arage);
+                    if($the_query->have_posts()){
+                        while($the_query->have_posts()){
+                            $the_query->the_post(); 
+                            global $product;
+                            ?>
+                                <a href=<?php the_permalink(); ?>>
+                                    <div class="image">
+                                        <?php the_post_thumbnail(); ?>
+                                    </div>
+                                    <div class="content">
+                                        <h2><?php the_title(); ?></h2>
+                                        <p>
+                                            <?php echo $product->get_price_html(); ?>
+                                        </p>
+                                    </div>
+                                </a>
+                            <?php
+                        }
+                    }
+                    wp_reset_postdata();
+                ?>
             </div>
         </div>
     </section>
 <!-- end product discount shop -->
 <!-- start product shop -->
 <section class="product-conatiner">
-        <div class="top-product">
-            <p>جدیدترین محصولات</p>
-            <div class="line"></div>
-            <p>محصولات بیشتر</p>
-        </div>
-        <div class="bottom-product">
-            <?php 
-                $arage = array(
-                    'post_type' => 'product',
-                    'post_per_page' => 4
-                );
-                $the_query = new WP_Query($arage);
-                if($the_query->have_posts()){
-                    while($the_query->have_posts()){
-                        $the_query->the_post(); 
-                        global $product;
-                        ?>
-                            <div>
-                                <div class="image">
-                                    <?php the_post_thumbnail(); ?>
-                                </div>
-                                <div class="content">
-                                    <h2><?php the_title(); ?></h2>
-                                    <p>
-                                        <?php echo $product->get_price_html(); ?>
-                                    </p>
-                                </div>
-                            </div>
-                        <?php
-                    }
-                }
-                wp_reset_postdata();
-            ?>
-        </div>
-    </section>
+    <?php 
+        get_template_part("/inc/template/product/top-product/title"); 
+    ?>
+    <div class="bottom-product">
+        <?php get_template_part("/inc/template/product/bottom-product/product"); ?>
+    </div>
+</section>
 <!-- end product shop -->
 <!-- start banner -->
 <section class="banner-conatiner">
@@ -162,14 +97,33 @@
             <p>محصولات بیشتر</p>
         </div>
         <div class="bottom-product-new">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <?php 
+                    $arage = array(
+                        'post_type' => 'product',
+                        'post_per_page' => 8
+                    );
+                    $the_query = new WP_Query($arage);
+                    if($the_query->have_posts()){
+                        while($the_query->have_posts()){
+                            $the_query->the_post(); 
+                            global $product;
+                            ?>
+                                <a href=<?php the_permalink(); ?>>
+                                    <div class="image">
+                                        <?php the_post_thumbnail(); ?>
+                                    </div>
+                                    <div class="content">
+                                        <h2><?php the_title(); ?></h2>
+                                        <p>
+                                            <?php echo $product->get_price_html(); ?>
+                                        </p>
+                                    </div>
+                                </a>
+                            <?php
+                        }
+                    }
+                    wp_reset_postdata();
+            ?>
         </div>
     </section>
 <!-- end new product shop -->
