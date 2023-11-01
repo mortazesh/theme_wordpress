@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    font-family: "shabnam";
+    direction: rtl;
+    color: #707070;
+    font-size: 11px;
+}
+
+@font-face {
+    font-family: "shabnam";
+    src: url("./assets/font/Shabnam.woff") format("woff");
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body{
+    background-color: #F5F5F5;
+}
+
+.woocommerce a{
+    width : 100% !important;
+}

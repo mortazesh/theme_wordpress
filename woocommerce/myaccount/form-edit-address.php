@@ -25,31 +25,34 @@ do_action( 'woocommerce_before_edit_account_address_form' ); ?>
 	<?php wc_get_template( 'myaccount/my-address.php' ); ?>
 <?php else : ?>
 
-	<form method="post">
+	<section class="w-full p-8 flex flex-col items-start justify-start">
+		<?php get_template_part("/inc/template/account/map"); ?>
+		<form method="post" class="w-full mt-5">
 
-		<h3><?php echo apply_filters( 'woocommerce_my_account_edit_address_title', $page_title, $load_address ); ?></h3><?php // @codingStandardsIgnoreLine ?>
+			<h3 class="text-xl font-bold mb-3"><?php echo apply_filters( 'woocommerce_my_account_edit_address_title', $page_title, $load_address ); ?></h3><?php // @codingStandardsIgnoreLine ?>
 
-		<div class="woocommerce-address-fields">
-			<?php do_action( "woocommerce_before_edit_address_form_{$load_address}" ); ?>
+			<div class="woocommerce-address-fields">
+				<?php do_action( "woocommerce_before_edit_address_form_{$load_address}" ); ?>
 
-			<div class="woocommerce-address-fields__field-wrapper">
-				<?php
-				foreach ( $address as $key => $field ) {
-					woocommerce_form_field( $key, $field, wc_get_post_data_by_key( $key, $field['value'] ) );
-				}
-				?>
+				<div class="woocommerce-address-fields__field-wrapper">
+					<?php
+					foreach ( $address as $key => $field ) {
+						woocommerce_form_field( $key, $field, wc_get_post_data_by_key( $key, $field['value'] ) );
+					}
+					?>
+				</div>
+
+				<?php do_action( "woocommerce_after_edit_address_form_{$load_address}" ); ?>
+
+				<p>
+					<button type="submit" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="save_address" value="<?php esc_attr_e( 'Save address', 'woocommerce' ); ?>"><?php esc_html_e( 'Save address', 'woocommerce' ); ?></button>
+					<?php wp_nonce_field( 'woocommerce-edit_address', 'woocommerce-edit-address-nonce' ); ?>
+					<input type="hidden" name="action" value="edit_address" />
+				</p>
 			</div>
 
-			<?php do_action( "woocommerce_after_edit_address_form_{$load_address}" ); ?>
-
-			<p>
-				<button type="submit" class="button<?php echo esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ); ?>" name="save_address" value="<?php esc_attr_e( 'Save address', 'woocommerce' ); ?>"><?php esc_html_e( 'Save address', 'woocommerce' ); ?></button>
-				<?php wp_nonce_field( 'woocommerce-edit_address', 'woocommerce-edit-address-nonce' ); ?>
-				<input type="hidden" name="action" value="edit_address" />
-			</p>
-		</div>
-
-	</form>
+		</form>
+	</section>
 
 <?php endif; ?>
 

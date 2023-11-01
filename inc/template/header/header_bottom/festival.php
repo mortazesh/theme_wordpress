@@ -1,6 +1,6 @@
 <div class="festival">
     <div class="icon-festival">
-        <img src="" alt="" title="" />
+        <img src="<?php bloginfo("template_url") ?>/assets/image/discount.png" alt="" title="" />
     </div>                
     <div class="text-festival">
         <p>

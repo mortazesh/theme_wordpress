@@ -1,3 +1,4 @@
+<?php /* Template Name: blog */ ?>
 <?php get_header(); ?>
 <div class="map-conatiner">
         <div class="map">

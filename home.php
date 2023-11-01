@@ -59,7 +59,7 @@
                                     <div class="content">
                                         <h2><?php the_title(); ?></h2>
                                         <p>
-                                            <?php echo $product->get_price_html(); ?>
+                                            <?php woocommerce_template_loop_price(); ?>
                                         </p>
                                     </div>
                                 </a>
@@ -156,11 +156,11 @@
                         if($the_query->have_posts()){
                             while($the_query->have_posts()){
                                 $the_query->the_post(); ?>
-                                    <div>
+                                    <a href="<?php the_permalink(); ?>">
                                         <div class="image">
                                             <?php the_post_thumbnail(); ?>
                                         </div>
-                                        <a class="content" href="<?php the_permalink(); ?>">
+                                        <div class="content">
                                                 <h2>
                                                     <?php the_title(); ?>
                                                 </h2>
@@ -169,16 +169,16 @@
                                                 </p>
                                                 <div class="icon">
                                                     <div>
-                                                        <i></i>
+                                                        <i class="fa-solid fa-calendar-days"></i>
                                                         <p><?php the_date(); ?></p>
                                                     </div>
                                                     <div>
-                                                        <i></i>
+                                                        <i class="fa-solid fa-user"></i>
                                                         <p><?php echo get_the_author(); ?></p>
                                                     </div>
                                                 </div>
-                                            </a>    
-                                    </div>
+                                        </div>    
+                                    </a>
                                 <?php
                             }
                         }

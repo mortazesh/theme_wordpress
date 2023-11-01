@@ -19,8 +19,9 @@
                 </div>
             </div>
         </div>
-        <div class="header-bottom">
+        <div class="header-bottom"> 
             <div class="bottom">
+                <?php get_template_part("/inc/template/header/header_bottom/mega_menu"); ?>
                 <?php get_template_part("/inc/template/header/header_bottom/menu"); ?>
                 <?php get_template_part("/inc/template/header/header_bottom/festival"); ?>
             </div>

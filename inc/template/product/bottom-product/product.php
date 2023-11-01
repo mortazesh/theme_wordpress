@@ -16,7 +16,7 @@
                 <div class="content">
                     <h2><?php the_title(); ?></h2>
                     <p>
-                        <?php echo $product->get_price_html(); ?>
+                        <?php woocommerce_template_loop_price(); ?>
                     </p>
                 </div>
             </a>

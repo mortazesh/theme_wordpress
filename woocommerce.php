@@ -17,7 +17,7 @@
             </p>
         </div>
 </div>
-<div class="woocommerce"> 
+<div class="woocommerce shop">  
     <div class="context">
         <?php woocommerce_content(); ?>
     </div>

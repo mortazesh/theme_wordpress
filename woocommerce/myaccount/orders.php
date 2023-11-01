@@ -23,14 +23,61 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 
 <?php if ( $has_orders ) : ?>
 
+	<div class="w-full p-8 flex flex-col items-start justify-start">
+		<?php get_template_part("/inc/template/account/map"); ?>
+		<div class="w-full col-span-12">
+			<div class="overflow-auto lg:overflow-visible ">
+						<table class="w-full table text-gray-400 border-separate space-y-6 text-sm">
+							<thead class="bg-gray-800 text-gray-500">
+								<tr class="h-20">
+									<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : ?>
+										<th class="p-3 text-right"><?php esc_html($column_name); ?></th>
+									<?php endforeach; ?>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="bg-gray-800">
+									<td class="p-3">
+										3
+									</td>
+									<td class="p-3">
+										Technology
+									</td>
+									<td class="p-3 font-bold">
+										200.00$
+									</td>
+									<td class="p-3">
+										<span class="bg-green-400 text-gray-50 rounded-md px-2">available</span>
+										<span class="bg-red-400 text-gray-50 rounded-md px-2">no stock</span>
+										<span class="bg-yellow-400 text-gray-50 rounded-md px-2">start sale</span>
+									</td>
+									<td class="p-3 ">
+										<a href="#" class="text-gray-400 hover:text-gray-100 mr-2">
+											<i class="fa fa-eye"></i>
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>	
+			</div>
+
+			<?php do_action( 'woocommerce_before_account_orders_pagination' ); ?>
+			<?php if ( 1 < $customer_orders->max_num_pages ) : ?>
+				<div class="woocommerce-pagination woocommerce-pagination--without-numbers woocommerce-Pagination">
+					<?php if ( 1 !== $current_page ) : ?>
+						<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button<?php echo esc_attr( $wp_button_class ); ?>" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page - 1 ) ); ?>"><?php esc_html_e( 'Previous', 'woocommerce' ); ?></a>
+					<?php endif; ?>
+
+					<?php if ( intval( $customer_orders->max_num_pages ) !== $current_page ) : ?>
+						<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button<?php echo esc_attr( $wp_button_class ); ?>" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page + 1 ) ); ?>"><?php esc_html_e( 'Next', 'woocommerce' ); ?></a>
+					<?php endif; ?>
+				</div>
+			<?php endif; ?>
+		</div>
+	<div>
+
 	<table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
-		<thead>
-			<tr>
-				<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : ?>
-					<th class="woocommerce-orders-table__header woocommerce-orders-table__header-<?php echo esc_attr( $column_id ); ?>"><span class="nobr"><?php echo esc_html( $column_name ); ?></span></th>
-				<?php endforeach; ?>
-			</tr>
-		</thead>
 
 		<tbody>
 			<?php
@@ -81,23 +128,12 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 		</tbody>
 	</table>
 
-	<?php do_action( 'woocommerce_before_account_orders_pagination' ); ?>
-
-	<?php if ( 1 < $customer_orders->max_num_pages ) : ?>
-		<div class="woocommerce-pagination woocommerce-pagination--without-numbers woocommerce-Pagination">
-			<?php if ( 1 !== $current_page ) : ?>
-				<a class="woocommerce-button woocommerce-button--previous woocommerce-Button woocommerce-Button--previous button<?php echo esc_attr( $wp_button_class ); ?>" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page - 1 ) ); ?>"><?php esc_html_e( 'Previous', 'woocommerce' ); ?></a>
-			<?php endif; ?>
-
-			<?php if ( intval( $customer_orders->max_num_pages ) !== $current_page ) : ?>
-				<a class="woocommerce-button woocommerce-button--next woocommerce-Button woocommerce-Button--next button<?php echo esc_attr( $wp_button_class ); ?>" href="<?php echo esc_url( wc_get_endpoint_url( 'orders', $current_page + 1 ) ); ?>"><?php esc_html_e( 'Next', 'woocommerce' ); ?></a>
-			<?php endif; ?>
-		</div>
-	<?php endif; ?>
-
 <?php else : ?>
-
-	<?php wc_print_notice( esc_html__( 'No order has been made yet.', 'woocommerce' ) . ' <a class="woocommerce-Button button' . esc_attr( $wp_button_class ) . '" href="' . esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ) . '">' . esc_html__( 'Browse products', 'woocommerce' ) . '</a>', 'notice' ); // phpcs:ignore WooCommerce.Commenting.CommentHooks.MissingHookComment ?>
+	
+	<div class="w-full p-8 flex flex-col items-start justify-start">
+		<?php get_template_part("/inc/template/account/map"); ?>
+		<?php wc_print_notice( esc_html__( 'No order has been made yet.', 'woocommerce' ) . ' <a class="woocommerce-Button button' . esc_attr( $wp_button_class ) . '" href="' . esc_url( apply_filters( 'woocommerce_return_to_shop_redirect', wc_get_page_permalink( 'shop' ) ) ) . '">' . esc_html__( 'Browse products', 'woocommerce' ) . '</a>', 'notice' ); // phpcs:ignore WooCommerce.Commenting.CommentHooks.MissingHookComment ?>
+	</div>
 
 <?php endif; ?>
 

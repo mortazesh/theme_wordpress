@@ -1,3 +1,3 @@
 <div class="card">
-    <img src="" alt="" title=""/>
+<i class="fa-solid fa-heart"></i>
 </div>

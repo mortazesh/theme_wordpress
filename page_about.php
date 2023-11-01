@@ -1,3 +1,4 @@
+<?php /* Template Name: about */ ?>
 <?php get_header(); ?>
 <div class="map-conatiner">
         <div class="map">
@@ -8,11 +9,7 @@
 </div>
 <div class="page-container">
     <div class="page">
-        <div class="artcle_top">
-
-        </div>
-        <div class="artcle_bottom">
-        </div>  
+        <?php the_content(); ?>
     </div>
 </div>
 <?php get_footer(); ?>
