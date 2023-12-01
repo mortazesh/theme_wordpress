@@ -8,7 +8,7 @@
         <div class="w-full col-span-12">
             <div class="overflow-auto lg:overflow-visible">
                 <table class="w-full table text-gray-400 border-separate space-y-6 text-sm p-2">
-                    <thead class="bg-sky-100 text-gray-500">
+                    <thead class="bg-gray-900 text-gray-500">
                         <tr class="h-20">
                             <th class="p-3 text-right">عنوان محصول</th>    
                             <th class="p-3 text-right">تاریخ انتشار</th>

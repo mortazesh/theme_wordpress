@@ -3,8 +3,8 @@
         <img src="<?php bloginfo("template_url") ?>/assets/image/discount.png" alt="" title="" />
     </div>                
     <div class="text-festival">
-        <p>
+        <a href="<?php bloginfo('url') ?>/festival">
             جشنواره فروش ویژه
-        </p>
+        </a>
     </div>
 </div>
