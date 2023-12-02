@@ -27,36 +27,63 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 		<?php get_template_part("/inc/template/account/map"); ?>
 		<div class="w-full col-span-12">
 			<div class="overflow-auto lg:overflow-visible ">
-						<table class="w-full table text-gray-400 border-separate space-y-6 text-sm">
-							<thead class="bg-gray-800 text-gray-500">
+						<table class="w-full table text-gray-400 border-separate space-y-6 text-sm p-2">
+							<thead class="bg-gray-900  text-gray-500">
 								<tr class="h-20">
-									<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : ?>
-										<th class="p-3 text-right"><?php esc_html($column_name); ?></th>
-									<?php endforeach; ?>
+									<th class="p-3 text-right">شماره</th>
+									<th class="p-3 text-right">تاریخ</th>
+									<th class="p-3 text-right">وضعیت</th>
+									<th class="p-3 text-right">قیمت</th>
+									<th class="p-3 text-right"></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="bg-gray-800">
-									<td class="p-3">
-										3
-									</td>
-									<td class="p-3">
-										Technology
-									</td>
-									<td class="p-3 font-bold">
-										200.00$
-									</td>
-									<td class="p-3">
-										<span class="bg-green-400 text-gray-50 rounded-md px-2">available</span>
-										<span class="bg-red-400 text-gray-50 rounded-md px-2">no stock</span>
-										<span class="bg-yellow-400 text-gray-50 rounded-md px-2">start sale</span>
-									</td>
-									<td class="p-3 ">
-										<a href="#" class="text-gray-400 hover:text-gray-100 mr-2">
-											<i class="fa fa-eye"></i>
-										</a>
-									</td>
+								<?php
+									foreach ( $customer_orders->orders as $customer_order ) {
+										$order      = wc_get_order( $customer_order ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+										$item_count = $order->get_item_count() - $order->get_item_count_refunded();
+								?>
+								<tr>
+									<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : ?>
+										<td class="p-3">
+											<?php if ( has_action( 'woocommerce_my_account_my_orders_column_' . $column_id ) ) : ?>
+												<?php do_action( 'woocommerce_my_account_my_orders_column_' . $column_id, $order ); ?>
+
+												<?php elseif ( 'order-number' === $column_id ) : ?>
+													<a href="<?php echo esc_url( $order->get_view_order_url() ); ?>">
+														<?php echo esc_html( _x( '#', 'hash before order number', 'woocommerce' ) . $order->get_order_number() ); ?>
+													</a>
+
+												<?php elseif ( 'order-date' === $column_id ) : ?>
+													<time datetime="<?php echo esc_attr( $order->get_date_created()->date( 'c' ) ); ?>"><?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?></time>
+
+												<?php elseif ( 'order-status' === $column_id ) : ?>
+													<?php echo esc_html( wc_get_order_status_name( $order->get_status() ) ); ?>
+
+												<?php elseif ( 'order-total' === $column_id ) : ?>
+													<?php
+													/* translators: 1: formatted order total 2: total order items */
+													echo wp_kses_post( sprintf( _n( '%1$s for %2$s item', '%1$s for %2$s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ) );
+												?>
+
+												<?php elseif ( 'order-actions' === $column_id ) : ?>
+													<?php
+													$actions = wc_get_account_orders_actions( $order );
+
+													if ( ! empty( $actions ) ) {
+														foreach ( $actions as $key => $action ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+															echo '<a href="' . esc_url( $action['url'] ) . '" class="woocommerce-button' . esc_attr( $wp_button_class ) . ' button ' . sanitize_html_class( $key ) . '">' . esc_html( $action['name'] ) . '</a>';
+														}
+													}
+												?>	
+
+											<?php endif; ?>
+										</td>
+									<?php endforeach; ?>
 								</tr>
+								<?php
+									}
+								?>
 							</tbody>
 						</table>
 					</div>	
@@ -76,57 +103,6 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 			<?php endif; ?>
 		</div>
 	<div>
-
-	<table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
-
-		<tbody>
-			<?php
-			foreach ( $customer_orders->orders as $customer_order ) {
-				$order      = wc_get_order( $customer_order ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-				$item_count = $order->get_item_count() - $order->get_item_count_refunded();
-				?>
-				<tr class="woocommerce-orders-table__row woocommerce-orders-table__row--status-<?php echo esc_attr( $order->get_status() ); ?> order">
-					<?php foreach ( wc_get_account_orders_columns() as $column_id => $column_name ) : ?>
-						<td class="woocommerce-orders-table__cell woocommerce-orders-table__cell-<?php echo esc_attr( $column_id ); ?>" data-title="<?php echo esc_attr( $column_name ); ?>">
-							<?php if ( has_action( 'woocommerce_my_account_my_orders_column_' . $column_id ) ) : ?>
-								<?php do_action( 'woocommerce_my_account_my_orders_column_' . $column_id, $order ); ?>
-
-							<?php elseif ( 'order-number' === $column_id ) : ?>
-								<a href="<?php echo esc_url( $order->get_view_order_url() ); ?>">
-									<?php echo esc_html( _x( '#', 'hash before order number', 'woocommerce' ) . $order->get_order_number() ); ?>
-								</a>
-
-							<?php elseif ( 'order-date' === $column_id ) : ?>
-								<time datetime="<?php echo esc_attr( $order->get_date_created()->date( 'c' ) ); ?>"><?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?></time>
-
-							<?php elseif ( 'order-status' === $column_id ) : ?>
-								<?php echo esc_html( wc_get_order_status_name( $order->get_status() ) ); ?>
-
-							<?php elseif ( 'order-total' === $column_id ) : ?>
-								<?php
-								/* translators: 1: formatted order total 2: total order items */
-								echo wp_kses_post( sprintf( _n( '%1$s for %2$s item', '%1$s for %2$s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ) );
-								?>
-
-							<?php elseif ( 'order-actions' === $column_id ) : ?>
-								<?php
-								$actions = wc_get_account_orders_actions( $order );
-
-								if ( ! empty( $actions ) ) {
-									foreach ( $actions as $key => $action ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-										echo '<a href="' . esc_url( $action['url'] ) . '" class="woocommerce-button' . esc_attr( $wp_button_class ) . ' button ' . sanitize_html_class( $key ) . '">' . esc_html( $action['name'] ) . '</a>';
-									}
-								}
-								?>
-							<?php endif; ?>
-						</td>
-					<?php endforeach; ?>
-				</tr>
-				<?php
-			}
-			?>
-		</tbody>
-	</table>
 
 <?php else : ?>
 	

@@ -8,15 +8,14 @@ if ( post_password_required() )
     <?php if ( have_comments() ) : ?>
         <h2 class="comments-title">
             <?php
-                printf( _nx( 'یک نظر برای "%2$s"', '%1$s نظر برای "%2$s"', get_comments_number(), 'comments title', 'twentythirteen' ),
-                    number_format_i18n( get_comments_number() ), '<span>' . get_the_title() . '</span>' );
+                printf('نظرات');
             ?>
         </h2>
 
         <ol class="comment-list">
             <?php
                 wp_list_comments( array(
-                    'style'       => 'ol',
+                    'style'       => 'div',
                     'short_ping'  => true,
                     'avatar_size' => 74,
                 ) );

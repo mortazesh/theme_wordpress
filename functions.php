@@ -1,5 +1,10 @@
 <?php
 
+require_once TEMPLATEPATH . '/inc/pluings/function_metabox.php';
+require_once TEMPLATEPATH . '/inc/pluings/function_tgm.php';
+require_once TEMPLATEPATH . '/inc/pluings/function_redux.php';
+require_once TEMPLATEPATH . '/inc/pluings/function_admin.php';
+
 // add options support theme
 
 add_theme_support( 'post-thumbnails' );
@@ -10,9 +15,9 @@ add_theme_support( 'html5' );
 add_theme_support( 'automatic-feed-links' );
 add_theme_support( 'custom-logo' );
 add_theme_support( 'custom-header' );
-add_theme_support('widgets');
+add_theme_support( 'widgets');
 add_theme_support( 'automatic-feed-links' );	
-add_theme_support('html5',array('comment-form',));
+add_theme_support( 'html5',array('comment-form'));
 add_theme_support( 'post-formats', array('video', 'audio', 'quote', 'image', 'gallery', 'link'));
 
 // add support theme with woocomerce
@@ -67,6 +72,8 @@ if(!function_exists('netelites_silder_posttype')){
                 ),
                 'public' => true,
                 'has_archive' => false,
+                'icon' => '',
+                'menu_position' => '',
                 'supports' => array('title','editor','thumbnail','link')
             )
         );
@@ -89,6 +96,8 @@ if(!function_exists('netelites_barnd_posttype')){
                 ),
                 'public' => true,
                 'archive' => false,
+                'icon' => '',
+                'menu_position' => '',
                 'supports' => array('title','editor','thumbnail','link')
             )
         );
@@ -97,27 +106,52 @@ if(!function_exists('netelites_barnd_posttype')){
     add_image_size( 'barnd-thumbnail', 150, 100, false );
 }
 
-// add post type video
+// add post type block html
 
-if(!function_exists('netelites_video_posttype')){
-    function netelites_video_posttype(){
-        register_post_type('video',
+if(!function_exists('netelites_post_type_html')){
+    function netelites_post_type_html(){
+        register_post_type('block_html', 
             array(
                 'labels' => array(
-                    'name' => __('ویدیو ها'),
-                    'singular_name' => __('ویدیو'),
-                    'add_new' => __('افزودن ویدیو'),
-                    'add_new_item' => __('افزودن ویدیو')
+                    'name' => __('بلوک های html'),
+                    'singular_name' => __('بلوک html'),
+                    'add_new' => __('افزودن بلوک html'),
+                    'add_new_item' => __('افزودن بلوک html')
                 ),
                 'public' => true,
-                'archive' => true,
-                'taxonomies' => array('post_tag','category'),
-                'supports' => array('title','editor','thumbnail','link','video')
+                'archive' => false,
+                'icon' => '',
+                'menu_position' => '',
+                'supports' => array('title','editor'),
+                'taxonomaies' => array('Categories')
             )
         );
-    }
-    add_filter('init','netelites_video_posttype');
+    }  
+    add_filter('init', 'netelites_post_type_html');
 }
+
+// add taxonomy shortcode html for post type block html
+
+function netelites_taxonomies_shorcode() {	
+
+	register_taxonomy( 'wl_product_type', 'block_html', 
+        array(
+            'labels' => array(
+                'name' => 'کدکوتاه',
+                'singular_name' => 'کدکوتاه',
+                'menu_name' => 'کدکوتاه',
+                'all_items' => 'همه کدکوتاه',
+            ),
+            'public' => false,
+            'publicly_queryable' => true,
+            'hierarchical' => false,
+            'show_admin_column' => true,
+        )
+    );
+	
+}  
+add_action( 'init', 'netelites_taxonomies_shorcode', 0 );
+
 
 // add options gallery product
 
@@ -146,45 +180,6 @@ if(!function_exists('netelite_register_widgets')){
 }
 
 
-// add menu tickets my account
 
-add_filter ( 'woocommerce_account_menu_items', 'tickets_products_link', 40 );
 
-if(!function_exists('tickets_add_products_endpoint')){
-    // here we hook the My Account menu links and add our custom one
-    function tickets_products_link( $menu_links ){
-        // we use array_slice() because we want our link to be on the 3rd position
-        return array_slice( $menu_links, 0, 4, true )
-            + array( 'tickets' => 'تیکت ها' )
-            + array_slice( $menu_links, 2, NULL, true );
-    }
-
-    // here we register our rewrite rule
-    function tickets_add_products_endpoint() {
-        add_rewrite_endpoint( 'purchased-products', EP_PAGES );
-    }
-
-    add_action( 'init', 'tickets_add_products_endpoint' );
-}
-
-// add menu tickets my account
-
-add_filter ( 'woocommerce_account_menu_items', 'wallet_products_link', 40 );
-
-if(!function_exists('wallet_add_products_endpoint')){
-    // here we hook the My Account menu links and add our custom one
-    function wallet_products_link( $menu_links ){
-        // we use array_slice() because we want our link to be on the 3rd position
-        return array_slice( $menu_links, 0, 5, true )
-            + array( 'wallet' => 'کیف پول' )
-            + array_slice( $menu_links, 2, NULL, true );
-    }
-
-    // here we register our rewrite rule
-    function wallet_add_products_endpoint() {
-        add_rewrite_endpoint( 'purchased-products', EP_PAGES );
-    }
-
-    add_action( 'init', 'wallet_add_products_endpoint' );
-}
 

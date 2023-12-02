@@ -50,7 +50,7 @@ function netelites_metaboxs(){
       // checkbox header field
       $setting_page->add_field( array(
           'name'       => __( 'هدر', $domain ),
-          'desc'       => __( 'غیر فعال سازی منو', $domain ),
+          'desc'       => __( 'غیر فعال سازی هدر', $domain ),
           'id'         =>  $prefix . '_header_checkbox',
           'type'       => 'checkbox',
           'show_on_cb' => 'cmb2_hide_if_no_cats', // function should return a bool value
@@ -68,9 +68,9 @@ function netelites_metaboxs(){
           'type' => 'select',
           'default' => 'header_one',
           'options' => array(
-            'header_one' => __( 'هدر اول', $domain ),
-            'header_two'   => __( 'هدر دوم', $domain ),
-            'header_tree'     => __( 'هدر سوم', $domain )
+            'header_one' => __( 'اول', $domain ),
+            'header_two'   => __( 'دوم', $domain ),
+            'header_tree'     => __( 'سوم', $domain )
            ),
           // 'protocols' => array('http', 'https', 'ftp', 'ftps', 'mailto', 'news', 'irc', 'gopher', 'nntp', 'feed', 'telnet'), // Array of allowed protocols
           // 'repeatable' => true,

@@ -126,17 +126,12 @@
             border-spacing: 0 15px;
         }
 
+        table tbody tr:nth-child(n+2){
+            background: #fff;
+        }
+
         i {
             font-size: 1rem !important;
-        }
-
-        .table tr {
-            border-radius: 20px;
-        }
-
-        tr td:nth-child(n+5),
-        tr th:nth-child(n+5) {
-            border-radius: .625rem 0 0 .625rem;
         }
 
         .text-box{
@@ -182,6 +177,20 @@
             width: 100% !important;
             height: 110px !important;
             border-radius: 1rem;
+        }
+
+        .woocommerce .woocommerce-customer-details, .woocommerce .woocommerce-order-details, .woocommerce .woocommerce-order-downloads{
+            width: 98.5%;
+            margin-right: 1.25rem;
+            margin-top: 1.25rem;
+        }
+
+        .woocommerce-order-details__title{
+            margin-bottom: 1rem;
+        }
+
+        .woocommerce-column__title{
+            margin-bottom: 1rem;
         }
 
     </style>

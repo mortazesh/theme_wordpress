@@ -1,11 +1,27 @@
-<?php get_header(); ?>
-    <div class="map-conatiner">
-        <div class="map">
-            <p>
-                صفحه اصلی / مقالات / <span><a href="<?php the_permalink(); ?>"><?php the_title(); ?><a></span>
-            </p>
-        </div>
-    </div>
+    <?php      
+        $prefix = 'netelites';
+        $header = get_post_meta(get_the_ID(), $prefix . '_header_select', true); 
+        get_header('two'); 
+    ?>
+    <?php
+        $prefix = 'netelites';
+        if(!get_post_meta(get_the_ID(), $prefix . '_map_checkbox', true)){
+            ?>
+                <div class="map-conatiner">
+                    <div class="map">
+                        <p>
+                            صفحه اصلی / مقالات / <span><a href="<?php the_permalink(); ?>"><?php the_title(); ?><a></span>
+                        </p>
+                    </div>
+                </div>
+            <?php
+        } 
+        else{
+            ?>
+
+            <?php
+        }
+    ?>
     <div class="article-container">
         <div class="title">
             <h1>
@@ -42,4 +58,4 @@
     <div class="comment_conatiner">
         <?php comments_template(); ?>
     </div>
-<?php get_footer(); ?>
+    <?php get_footer(); ?>
